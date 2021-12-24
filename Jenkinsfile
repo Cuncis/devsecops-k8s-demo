@@ -8,6 +8,7 @@ pipeline {
           archive 'target/*.jar' 
         }
       }
+      
       stage('Unit Tests - JUnit and Jacoco') {
         steps {
           sh "mvn test"
@@ -19,5 +20,15 @@ pipeline {
           }
         }
       }
+
+      stage('Docker Build and Push') {
+      steps {
+        withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
+          sh 'printenv'
+          sh 'docker build -t cuncis1st/numeric-app:""$GIT_COMMIT"" .'
+          sh 'docker push cuncis1st/numeric-app:""$GIT_COMMIT""'
+        }
+      }
     }
+  }
 }
