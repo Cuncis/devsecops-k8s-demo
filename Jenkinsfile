@@ -23,12 +23,12 @@ pipeline {
 
       stage('Docker Build and Push') {
         steps {
-          sh "docker --version"
-          // withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
-          //   sh 'printenv'
-          //   sh 'docker build -t cuncis1st/numeric-app:""$GIT_COMMIT"" .'
-          //   sh 'docker push cuncis1st/numeric-app:""$GIT_COMMIT""'
-          // }
+          // sh "docker --version"
+          withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
+            sh 'printenv'
+            sh 'docker build -t cuncis1st/numeric-app:""$GIT_COMMIT"" .'
+            sh 'docker push cuncis1st/numeric-app:""$GIT_COMMIT""'
+          }
         }
       }
 
