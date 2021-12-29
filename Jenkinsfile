@@ -27,7 +27,7 @@ pipeline {
         }
         post {
           always {
-            pitmutation mutationStatsFile: '**/target/pit-reports/**/mutations.xml'
+            pitmutation mutationStatsFile: '/var/lib/jenkins/workspace/devsecops-numeric-app/target/pit-reports/**/mutations.xml'
           }
         }
       }
