@@ -31,11 +31,10 @@ pipeline {
           }
         }
       }
-      
-      stage('SonarQube Analysis') {
-        def mvn = tool 'Default Maven';
-        withSonarQubeEnv() {
-          sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=numeric-application"
+
+      stage('SonarQube - SAST') {
+        steps {
+          sh "mvn clean verify sonar:sonar -Dsonar.projectKey=numeric-application -Dsonar.host.url=http://c79c-139-195-61-58.ngrok.io -Dsonar.login=2696a1696da7ddc6039af4c2fe0572d037cc278c"
         }
       }
 
