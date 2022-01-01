@@ -34,7 +34,10 @@ pipeline {
 
       stage('SonarQube - SAST') {
         steps {
-          sh "mvn clean verify sonar:sonar -Dsonar.projectKey=numeric-application -Dsonar.host.url=http://c79c-139-195-61-58.ngrok.io -Dsonar.login=2696a1696da7ddc6039af4c2fe0572d037cc278c"
+          sh "mvn sonar:sonar \
+  -Dsonar.projectKey=numeric-application \
+  -Dsonar.host.url=http://localhost:9000 \
+  -Dsonar.login=3fae0c6184264d1ddc81c7e150987302c5ed797f"
         }
       }
 
