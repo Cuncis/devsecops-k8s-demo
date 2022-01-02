@@ -37,8 +37,7 @@ pipeline {
           withSonarQubeEnv('SonarQube') {
             sh "mvn sonar:sonar \
                 -Dsonar.projectKey=numeric-application \
-                -Dsonar.host.url=http://localhost:9000 \
-                -Dsonar.login=3fae0c6184264d1ddc81c7e150987302c5ed797f"
+                -Dsonar.host.url=http://localhost:9000"
           }
           timeout(time:2, unit: 'MINUTES') {
             script {
@@ -50,12 +49,12 @@ pipeline {
 
       stage('Docker Build and Push') {
         steps {
-          // sh "docker --version"
-          withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
-            sh 'printenv'
-            sh 'docker build -t cuncis1st/numeric-app:""$GIT_COMMIT"" .'
-            sh 'docker push cuncis1st/numeric-app:""$GIT_COMMIT""'
-          }
+          sh "docker --version"
+          // withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
+          //   sh 'printenv'
+          //   sh 'docker build -t cuncis1st/numeric-app:""$GIT_COMMIT"" .'
+          //   sh 'docker push cuncis1st/numeric-app:""$GIT_COMMIT""'
+          // }
         }
       }
 
